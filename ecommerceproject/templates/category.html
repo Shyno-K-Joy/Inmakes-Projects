@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if category %}
+        {{ category.description|truncatewords:155 }}
+    {% else %}
+        EcoCraft Haven is an online marketplace dedicated to promoting sustainable and eco-friendly products. Our mission is to connect environmentally conscious consumers with artisans and businesses that prioritize ethical and sustainable practices. At EcoCraft Haven, we believe in the power of conscious consumerism to make a positive impact on the planet.
+    {% endif %}
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{ category.name }} - EcoCraft Haven
+    {% else %}
+        See our New Collections - EcoCraft Haven
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if category %}
+
+    <div>
+        <div class="row my_row_class">
+            <div class="mx-auto">
+            <p><a href="{% url 'shop:allProdCat' %}">Our Product Collections</a></p>
+        </div>
+            </div>
+    </div>
+    {% endif %}
+<div class="mx_auto">
+    {% if category %}
+        <img class="my_image" src="{{category.image.url}}" alt="{{category.name}}">
+</div>
+    <br>
+<div>
+        <h1 class="text-center my_title">{{category.name}}</h1>
+        <p class="text-justify">{{category.description}}</p>
+</div>
+    {% else %}
+<div>
+<img class="my_image my_image_padding" src="{% static 'img/banner.png' %}" alt="Our Products" width="1250px;">
+</div>
+<br>
+<div>
+    <h1 class="text-center my_title">Our Products Collections</h1>
+    <p class="text-justify">EcoCraft Haven invites you to explore our meticulously curated collection of eco-friendly and sustainable products. From handwoven upcycled denim tote bags to solar-powered portable chargers, each item in our inventory tells a story of ethical craftsmanship and environmental consciousness. Embrace a lifestyle that prioritizes sustainability without compromising style or functionality. Our diverse range includes zero-waste home essentials, green beauty products, and  sustainable tech gadgets. Every product is thoughtfully chosen to contribute to a greener tomorrow, ensuring that your purchase aligns with your commitment to a more sustainable world. Welcome to a haven of conscious consumerism, where every choice makes a positive impact on the planet.</p>
+</div>
+    {% endif %}
+<div class="container">
+    <div class="row mx_auto">
+        {% for product in products.object_list %}
+        <div class="my_bottom_margin col-9 col-sm-12 col-md-4 xol-lg-4">
+            <div class="card text-center" style="min-width:18rem;">
+                <a href="{{product.get_url}}"><img class="card-img-top my_image" src="{{product.image.url}}" alt="{{product.name}}"></a>
+            <div class="card-body">
+                <h4>{{product.name}}</h4>
+                <p>{{product.price}}</p>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="mx-auto">
+        {% if products.paginator.num_pages > 1 %}
+
+        <hr>
+        <div class="text-center">
+            {% for pg in products.paginator.page_range %}
+                <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <br>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
