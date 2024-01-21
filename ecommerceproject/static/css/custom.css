@@ -1,4 +1,7 @@
 body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: 'Roboto', sans-serif;
 }
 /***Navbar ***/
@@ -13,13 +16,15 @@ body{
     font-size :14px;
     text-transform :uppercase;
 }
-.my_footer{
-    background-color:white;
-    height :60px;
-}
-.my_footer{
-    padding-top :20px;
-    font-size :14px;
+.my_footer {
+    background-color: white;
+    height: 60px;
+    padding-top: 20px;
+    font-size: 14px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 /*** category page ***/
